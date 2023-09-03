@@ -15,5 +15,5 @@ fmt:
     treefmt
 
 # Run ghcid -- auto-recompile and run `main` function
-run:
-    ghcid -c "cabal repl exe:haskell-template" --warnings -T :main
+run prog:
+    ghcid -c "cabal repl exe:{{prog}}" --warnings -T :main
