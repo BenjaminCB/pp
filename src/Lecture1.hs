@@ -1,4 +1,4 @@
 module Lecture1 where
 
 main :: IO ()
-main = putStrLn "Hello, Lecture1!"
+main = putStrLn "Hello, World!"
