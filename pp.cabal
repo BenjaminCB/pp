@@ -29,49 +29,10 @@ common shared
     -fprint-explicit-foralls -fprint-explicit-kinds
 
   default-extensions:
-    NoStarIsType
-    BangPatterns
-    ConstraintKinds
-    DataKinds
-    DeriveDataTypeable
-    DeriveFoldable
-    DeriveFunctor
-    DeriveGeneric
-    DeriveLift
-    DeriveTraversable
-    DerivingStrategies
-    DerivingVia
-    EmptyCase
-    EmptyDataDecls
-    EmptyDataDeriving
-    ExistentialQuantification
-    ExplicitForAll
-    FlexibleContexts
-    FlexibleInstances
-    GADTSyntax
-    GeneralisedNewtypeDeriving
-    ImportQualifiedPost
-    KindSignatures
-    LambdaCase
-    MultiParamTypeClasses
-    MultiWayIf
-    NumericUnderscores
     OverloadedStrings
-    PolyKinds
-    PostfixOperators
-    RankNTypes
-    ScopedTypeVariables
-    StandaloneDeriving
-    StandaloneKindSignatures
     TupleSections
-    TypeApplications
-    TypeFamilies
-    TypeOperators
-    ViewPatterns
 
-  build-depends:
-    , base
-
+  build-depends:      base
   hs-source-dirs:     src
   default-language:   Haskell2010
 
@@ -80,5 +41,5 @@ executable pp
   main-is: Main.hs
 
 executable lecture1
-  import: shared
+  import:  shared
   main-is: Lecture1.hs
