@@ -16,6 +16,6 @@ product [] = 1
 product (x : xs) = x * product xs
 
 second :: [a] -> a
--- second [] = undefined
--- second [_] = undefined
+second [] = undefined
+second [_] = undefined
 second (_ : x : _) = x
