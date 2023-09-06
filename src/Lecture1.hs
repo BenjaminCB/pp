@@ -11,6 +11,7 @@ myLength = foldr (\_ a -> a + 1) 0
 laengde :: (Num p) => [a] -> p
 laengde = foldr (\_ a -> a + 1) 0
 
+myList :: [Int]
 myList = [2, 3, 17, 9, 69, 484000]
 
 data BTree a = BLeaf a | BBranch a (BTree a) (BTree a) deriving (Show)
