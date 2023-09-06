@@ -25,29 +25,20 @@ extra-source-files:
 common shared
   ghc-options:
     -Wall -Wincomplete-record-updates -Wincomplete-uni-patterns
-    -Wmissing-deriving-strategies -Wunused-foralls -Wunused-foralls
+    -Wunused-foralls -Wunused-foralls
     -fprint-explicit-foralls -fprint-explicit-kinds
-
-  mixins:
-    base hiding (Prelude),
-    relude (Relude as Prelude, Relude.Container.One),
-    relude
 
   default-extensions:
     OverloadedStrings
     TupleSections
 
-  build-depends:
-    , base
-    , relude        >=1.0
-
+  build-depends:      base
   hs-source-dirs:     src
   default-language:   Haskell2010
 
-executable pp
   import:  shared
   main-is: Main.hs
 
 executable lecture1
-  import: shared
+  import:  shared
   main-is: Lecture1.hs
