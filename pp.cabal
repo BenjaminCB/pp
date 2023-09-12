@@ -24,7 +24,8 @@ extra-source-files:
 
 common shared
   ghc-options:
-  -Wall -Wincomplete-patterns
+
+  -wall -Wincomplete-patterns
 
   default-extensions:
     OverloadedStrings
