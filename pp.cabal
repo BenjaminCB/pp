@@ -48,3 +48,7 @@ executable lecture2
 executable lecture3
   import:  shared
   main-is: Lecture3.hs
+
+executable lecture4
+  import:  shared
+  main-is: Lecture4.hs
