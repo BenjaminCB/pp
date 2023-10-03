@@ -1,6 +1,6 @@
 module Lecture5 where
 
-import Prelude hiding (replicate, repeat, reverse, last, any, filter)
+import Prelude hiding (replicate, repeat, reverse, last, any, filter, takeWhile, dropWhile)
 
 main :: IO ()
 main = do
@@ -38,6 +38,18 @@ filter f (x:xs)
 
 isolate :: Eq a => a -> [a] -> ([a], [a])
 isolate a xs = (filter (/= a) xs, filter (== a) xs)
+
+takeWhile :: (a -> Bool) -> [a] -> [a]
+takeWhile _ [] = []
+takeWhile f (x:xs)
+    | f x = x : takeWhile f xs
+    | otherwise = []
+
+dropWhile :: (a -> Bool) -> [a] -> [a]
+dropWhile _ [] = []
+dropWhile f (x:xs)
+    | f x = dropWhile f xs
+    | otherwise = x : xs
 
 wrapup :: Eq a => [a] -> [[a]]
 wrapup [] = []
