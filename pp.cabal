@@ -61,6 +61,10 @@ executable lecture6
   import:  shared
   main-is: Lecture6.hs
 
+executable lecture7
+  import:  shared
+  main-is: Lecture7.hs
+
 executable project
   import:  shared
   main-is: Project.hs
