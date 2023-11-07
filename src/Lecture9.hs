@@ -29,6 +29,13 @@ hugorm = do
 getNums :: Int -> IO [Int]
 getNums = sequence . flip replicate readLn
 
+getNums' :: Int -> IO [Int]
+getNums' 0 = return []
+getNums' n = do
+    x <- readLn
+    xs <- getNums' (n - 1)
+    return (x:xs)
+
 sumInts :: Int -> IO Int
 sumInts n = do
     m <- readLn
