@@ -3,24 +3,24 @@ module Lecture10 where
 import Control.Monad.Reader
 import Control.Monad.Trans.Maybe
 
-data Onion a = Core a | Layer (Onion a) deriving Show
+data Onion a = Core a | Layer (Onion a) deriving (Show)
 
 instance Functor Onion where
-  fmap f (Core a) = Core (f a)
-  fmap f (Layer a) = Layer (fmap f a)
+    fmap f (Core a) = Core (f a)
+    fmap f (Layer a) = Layer (fmap f a)
 
-data UTree a = Node a [UTree a] deriving Show
+data UTree a = Node a [UTree a] deriving (Show)
 
 instance Functor UTree where
-  fmap f (Node a []) = Node (f a) []
-  fmap f (Node a xs) = Node (f a) (fmap f <$> xs)
+    fmap f (Node a []) = Node (f a) []
+    fmap f (Node a xs) = Node (f a) (fmap f <$> xs)
 
-newtype R r a = R { unR :: r -> a }
+newtype R r a = R {unR :: r -> a}
 
 instance Functor (R r) where
-  fmap f (R g) = R (f . g)
+    fmap f (R g) = R (f . g)
 
-data List a = Nil |  a :| List a deriving Show
+data List a = Nil | a :| List a deriving (Show)
 
 instance Functor List where
     fmap _ Nil = Nil
@@ -46,11 +46,12 @@ instance Applicative List where
 --     (f:fs) <*> xs = (f <$> xs) ++ (fs <*> xs)
 --     _ <*> _ = []
 
-data Exp a = Var a
-           | Val Integer
-           | Add (Exp a) (Exp a)
-           | Mul (Exp a) (Exp a)
-           deriving Show
+data Exp a
+    = Var a
+    | Val Integer
+    | Add (Exp a) (Exp a)
+    | Mul (Exp a) (Exp a)
+    deriving (Show)
 
 instance Functor Exp where
     fmap f (Var a) = Var (f a)
@@ -62,25 +63,21 @@ instance Applicative Exp where
     pure = Var
 
     _ <*> (Val a) = Val a
-
     (Var f) <*> (Var a) = Var (f a)
     (Var f) <*> (Add a b) = Add (f <$> a) (f <$> b)
     (Var f) <*> (Mul a b) = Mul (f <$> a) (f <$> b)
-
     (Add f g) <*> (Var a) = Add (f <*> Var a) (g <*> Var a)
     (Add f g) <*> (Add a b) = Add (f <*> a) (g <*> b)
     (Add f g) <*> (Mul a b) = Mul (f <*> a) (g <*> b)
-
     (Mul f g) <*> (Var a) = Mul (f <*> Var a) (g <*> Var a)
     (Mul f g) <*> (Add a b) = Add (f <*> a) (g <*> b)
     (Mul f g) <*> (Mul a b) = Mul (f <*> a) (g <*> b)
 
 main :: IO ()
 main = do
-    print $ prodthree [1,2,3] [4,5,6] [7,8,9]
+    print $ prodthree [1, 2, 3] [4, 5, 6] [7, 8, 9]
     print $ runReader (runMaybeT (eval' (Add (Val 1) (Var "x")))) [("x", 2)]
     print $ runReader (runMaybeT (eval' (Add (Val 1) (Var "x")))) [("y", 2)]
-
 
 prodthree :: (Num a) => [a] -> [a] -> [a] -> [a]
 prodthree xs ys zs = (\a b c -> a * b * c) <$> xs <*> ys <*> zs
@@ -93,7 +90,7 @@ eval (Val x) _ = x
 eval (Add x y) env = eval x env + eval y env
 eval (Mul x y) env = eval x env * eval y env
 
-eval' :: Ord a => Exp a -> MaybeT (Reader [(a, Integer)]) Integer
+eval' :: (Ord a) => Exp a -> MaybeT (Reader [(a, Integer)]) Integer
 eval' (Var x) = do
     env <- ask
     case lookup x env of

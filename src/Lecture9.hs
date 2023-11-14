@@ -9,14 +9,14 @@ l :: IO ()
 l = getLine >>= letters
 
 letters :: String -> IO ()
-letters = mapM_ (putStrLn . (:[]))
+letters = mapM_ (putStrLn . (: []))
 
 letters' :: String -> IO ()
-letters' = sequence_ . map (putStrLn . (:[]))
+letters' = sequence_ . map (putStrLn . (: []))
 
 letters'' :: String -> IO ()
 letters'' "" = return ()
-letters'' (c:cs) = do
+letters'' (c : cs) = do
     putStrLn [c]
     letters'' cs
 
@@ -34,7 +34,7 @@ getNums' 0 = return []
 getNums' n = do
     x <- readLn
     xs <- getNums' (n - 1)
-    return (x:xs)
+    return (x : xs)
 
 sumInts :: Int -> IO Int
 sumInts n = do
@@ -51,4 +51,4 @@ whileIO io p f b = do
         else return b
 
 sumInts' :: Int -> IO Int
-sumInts' = whileIO readLn (/=0) (+)
+sumInts' = whileIO readLn (/= 0) (+)
