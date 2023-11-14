@@ -15,6 +15,27 @@ instance Functor UTree where
   fmap f (Node a []) = Node (f a) []
   fmap f (Node a xs) = Node (f a) (fmap f <$> xs)
 
+newtype R r a = R { unR :: r -> a }
+
+instance Functor (R r) where
+  fmap f (R g) = R (f . g)
+
+data List a = Nil |  a :| List a deriving Show
+
+instance Functor List where
+    fmap _ Nil = Nil
+    fmap f (a :| as) = f a :| (f <$> as)
+
+instance Semigroup (List a) where
+    Nil <> ys = ys
+    (x :| xs) <> ys = x :| (xs <> ys)
+
+instance Applicative List where
+    pure a = a :| Nil
+    Nil <*> _ = Nil
+    _ <*> Nil = Nil
+    (f :| fs) <*> xs = (f <$> xs) <> (fs <*> xs)
+
 -- commented due to duplicate instance
 -- instance Functor ((->) a) where
 --   fmap f g = f . g
