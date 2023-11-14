@@ -72,7 +72,7 @@ eval (Val x) _ = x
 eval (Add x y) env = eval x env + eval y env
 eval (Mul x y) env = eval x env * eval y env
 
-eval' :: Exp String -> MaybeT (Reader [(String, Integer)]) Integer
+eval' :: Ord a => Exp a -> MaybeT (Reader [(a, Integer)]) Integer
 eval' (Var x) = do
     env <- ask
     case lookup x env of
