@@ -77,6 +77,10 @@ executable lecture10
   import:  shared
   main-is: Lecture10.hs
 
+executable lecture11
+  import:  shared
+  main-is: Lecture11.hs
+
 executable tmorris
   import:  shared
   main-is: TMorris.hs
