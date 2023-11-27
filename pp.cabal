@@ -81,9 +81,15 @@ executable lecture11
   import:  shared
   main-is: Lecture11.hs
 
+executable lecture12
+  import:  shared
+  main-is: Lecture12.hs
+
 executable tmorris
   import:  shared
   main-is: TMorris.hs
+  other-m7odules:
+    Parsing
 
 executable project
   import:  shared
